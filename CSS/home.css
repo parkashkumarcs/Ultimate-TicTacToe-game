@@ -1,30 +1,32 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitcount+Grid+Double:wght@100..900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
-
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitcount+Grid+Double:wght@100..900&family=Manufacturing+Consent&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
-  background: url('../assets/backg.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url('../assets/backg.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Roboto', sans-serif;
 }
 
+/* The following css for Container along with with glowing*/
 .container {
   position: relative;
-  width: 80vw;
-  height: 60vh;
+  width: 90vw;
+  max-width: 800px;
+  height: 65vh;
+  max-height: 500px;
   border-radius: 2rem;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
 }
+
 .container::before {
   content: "";
   position: absolute;
@@ -34,9 +36,8 @@ body {
   bottom: -4px;
   z-index: -1;
   background: linear-gradient(90deg, #9900ff, #4c00ff, #6200ff);
-  /* background-size: 600% 600%; */
-  /* animation: glowingBorder 8s linear infinite; */
   filter: blur(10px);
+  border-radius: 2rem;
 }
 
 .container::after {
@@ -50,35 +51,17 @@ body {
   background: #000000;
   z-index: -1;
 }
+
+/* Let's add the properties for glow-dot*/
 .container .glow-dot {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background: #fcfcfc;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
   border-radius: 50%;
   box-shadow: 0 0 15px 5px #00f0ff;
   animation: moveAlongBorder 8s linear infinite;
   z-index: -2;
-}
-.button__Container{
-    color: white;
-      text-align: center;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-}
-.button__Container button{
-    width: 10rem;
-    padding: 10px;
-    margin: 5px;
-    font-size: 15px;
-    border: .1rem solid rgb(105, 7, 197);
-    border-radius: 5px;
-    background: #000000;
-    color: white;
-    
 }
 
 @keyframes moveAlongBorder {
@@ -88,18 +71,104 @@ body {
   }
   25% {
     top: 0;
-    left: calc(100% - 50px);
+    left: calc(100% - 20px);
   }
   50% {
-    top: calc(100% - 50px);
-    left: calc(100% - 50px);
+    top: calc(100% - 20px);
+    left: calc(100% - 20px);
   }
   75% {
-    top: calc(100% - 50px);
+    top: calc(100% - 20px);
     left: 0;
   }
   100% {
     top: 0;
     left: 0;
+  }
+}
+
+/* Button container */
+.button__Container {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Heading */
+.button__Container h1 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-family: "Bitcount Grid Double", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.button__Container button {
+  width: 60%;
+  max-width: 200px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 0.1rem solid rgb(105, 7, 197);
+  border-radius: 5px;
+  background: #000000;
+  color: white;
+  transition: 0.3s;
+}
+
+.button__Container button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: #8102f8;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .button__Container h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .button__Container button {
+    width: 80%;
+  }
+
+  .container .glow-dot {
+    width: 15px;
+    height: 15px;
+  }
+
+  @keyframes moveAlongBorder {
+    0% {
+      top: 0;
+      left: 0;
+    }
+    25% {
+      top: 0;
+      left: calc(100% - 15px);
+    }
+    50% {
+      top: calc(100% - 15px);
+      left: calc(100% - 15px);
+    }
+    75% {
+      top: calc(100% - 15px);
+      left: 0;
+    }
+    100% {
+      top: 0;
+      left: 0;
+    }
   }
 }
