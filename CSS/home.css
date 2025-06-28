@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitcount+Grid+Double:wght@100..900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: url('../assets/backg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  width: 80vw;
+  height: 60vh;
+  border-radius: 2rem;
+  z-index: 1;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  z-index: -1;
+  background: linear-gradient(90deg, #9900ff, #4c00ff, #6200ff);
+  /* background-size: 600% 600%; */
+  /* animation: glowingBorder 8s linear infinite; */
+  filter: blur(10px);
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 2rem;
+  background: #000000;
+  z-index: -1;
+}
+.container .glow-dot {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #fcfcfc;
+  border-radius: 50%;
+  box-shadow: 0 0 15px 5px #00f0ff;
+  animation: moveAlongBorder 8s linear infinite;
+  z-index: -2;
+}
+.button__Container{
+    color: white;
+      text-align: center;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+}
+.button__Container button{
+    width: 10rem;
+    padding: 10px;
+    margin: 5px;
+    font-size: 15px;
+    border: .1rem solid rgb(105, 7, 197);
+    border-radius: 5px;
+    background: #000000;
+    color: white;
+    
+}
+
+@keyframes moveAlongBorder {
+  0% {
+    top: 0;
+    left: 0;
+  }
+  25% {
+    top: 0;
+    left: calc(100% - 50px);
+  }
+  50% {
+    top: calc(100% - 50px);
+    left: calc(100% - 50px);
+  }
+  75% {
+    top: calc(100% - 50px);
+    left: 0;
+  }
+  100% {
+    top: 0;
+    left: 0;
+  }
+}
