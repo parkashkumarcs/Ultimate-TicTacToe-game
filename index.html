@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/home.css">
-    <title>Tic-Tac-Toe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./CSS/home.css">
+  <title>Tic-Tac-Toe</title>
 </head>
 <body>
-    
-    <div class="container">
-        <div class="glow-dot"></div>
-        <div class="button__Container">
-            <h1>Tic Tac Toe Game</h1>
-            <button onclick="location.href='#'" class="btn">
-                Play With Computer
-            </button>
-            <button onclick="location.href='#'" class="btn">
-                Multiplayer
-            </button>
-        </div>
-    </div> 
+  
+  <div class="container">
+    <div class="glow-dot"></div>
+    <div class="button__Container">
+      <h1>Tic Tac Toe Game</h1>
+      <button id="openModal" class="btn">Play With Computer</button>
+      <button onclick="location.href='#'" class="btn">Multiplayer</button>
+    </div>
+  </div> 
+
+  <!-- Popup Modal -->
+  <div id="gridModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Select Grid Size</h2>
+      <div class="button-group">
+        <button onclick="location.href='../pages/game-3x3.html'" class="btn">3 × 3 Grid</button>
+        <button onclick="location.href='../pages/game-5x5.html'" class="btn">5 × 5 Grid</button>
+        <button onclick="location.href='../pages/game-7x7.html'" class="btn">7 × 7 Grid</button>
+        <button onclick="location.href='../pages/game-9x9.html'" class="btn">9 × 9 Grid</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./Javascript/popBox.js"></script>
 </body>
 </html>
