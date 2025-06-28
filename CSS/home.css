@@ -52,8 +52,8 @@ body {
   z-index: -1;
 }
 
-/* Let's add the properties for glow-dot*/
-.container .glow-dot {
+/* Let's add the properties for glow__Dot*/
+.container .glow__Dot {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -144,7 +144,7 @@ body {
     width: 80%;
   }
 
-  .container .glow-dot {
+  .container .glow__Dot {
     width: 15px;
     height: 15px;
   }
@@ -171,9 +171,31 @@ body {
       left: 0;
     }
   }
+
+  .model__Content {
+    width: 90%;
+    padding: 20px 15px;
+  }
+
+  .model__Content h2 {
+    font-size: 1.2rem;
+  }
+
+  .model__Content .btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    margin: 8px 0;
+  }
+
+  .close {
+    font-size: 1.2rem;
+    top: 8px;
+    right: 10px;
+  }
 }
 
-/* Modal Styles */
+/* The following css codes for PopBox for further option in Tic Tac Toe games*/
 .modal {
   display: none;
   position: fixed;
@@ -183,10 +205,11 @@ body {
   background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
+  transition: 1s;
 }
 
-.modal-content {
-  background: #fff;
+.model__Content {
+  background: rgb(105, 7, 197);
   padding: 30px 20px;
   border-radius: 12px;
   width: 90%;
@@ -194,16 +217,45 @@ body {
   text-align: center;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 0.4s ease forwards;
+  opacity: 0;
 }
 
-.modal-content h2 {
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.model__Content h2 {
   margin-bottom: 20px;
-  color: #333;
+  color: #ffffff;
 }
 
-.modal-content .btn {
-  width: 100%;
+.model__Content .btn {
+  width: 50%;
   margin: 10px 0;
+  border-radius: 4px;
+  border: none;
+  font-size: 20px;
+  font-weight: bolder;
+  background: #000000;
+  color: #ffffff;
+  padding: 10px;
+  transition: .5s;
+  border: .1rem solid black;
+}
+.model__Content .btn:hover{
+    scale: 1.1;
+    cursor: pointer;
+    background-color: rgba(105, 7, 197, 0.808);
+    transition: .5s;
+    border: .1rem solid rgb(4, 245, 225);
 }
 
 .close {
@@ -211,6 +263,7 @@ body {
   right: 15px;
   top: 10px;
   font-size: 1.5rem;
-  color: #333;
+  color: #fafafa;
   cursor: pointer;
+  
 }
