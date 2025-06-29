@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./CSS/home.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./CSS/home.css" />
   <title>Tic-Tac-Toe</title>
 </head>
 <body>
-  
+
   <div class="container">
     <div class="glow__Dot"></div>
     <div class="button__Container">
@@ -17,19 +17,32 @@
     </div>
   </div> 
 
-  <!-- Popup Modal Option-->
+  <!-- 🎧 Audio Controls -->
+  <div class="audio__Controls">
+    <button id="muteToggle">Music🔊</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+  </div>
+
+  <!-- Popup Modal Option -->
   <div id="gridModal" class="modal">
     <div class="model__Content">
       <span class="close" id="closeModal">&times;</span>
       <h2>Select Grid Size</h2>
       <div class="button__Group">
-        <button onclick="location.href='../pages/grid_3x3.html'" class="btn">3 × 3 Grid</button>
-        <button onclick="location.href='../pages/game-5x5.html'" class="btn">5 × 5 Grid</button>
-        <button onclick="location.href='../pages/game-7x7.html'" class="btn">7 × 7 Grid</button>
-        <button onclick="location.href='../pages/game-9x9.html'" class="btn">9 × 9 Grid</button>
+        <button data-link="../pages/grid_3x3.html" class="btn">3 × 3 Grid</button>
+        <button data-link="../pages/game-5x5.html" class="btn">5 × 5 Grid</button>
+        <button data-link="../pages/game-7x7.html" class="btn">7 × 7 Grid</button>
+        <button data-link="../pages/game-9x9.html" class="btn">9 × 9 Grid</button>
       </div>
     </div>
   </div>
+
+  <!-- 🔊 Audio -->
+  <audio id="hoverSound" src="./assets/hover.wav" preload="auto"></audio>
+  <audio id="clickSound" src="./assets/click_update.mp3" preload="auto"></audio>
+
+  <!-- 🎵 Multiple Background Tracks (shuffled) -->
+  <audio id="bgMusic" preload="auto" loop></audio>
 
   <script src="./Javascript/popBox.js"></script>
 </body>

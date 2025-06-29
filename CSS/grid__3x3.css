@@ -69,10 +69,30 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cell.X {
+  animation: pop-in 0.2s ease forwards;
+}
+.cell.O {
+  animation: pop-in 0.2s ease forwards;
 }
 .cell:hover {
   background-color: #1a1a1a;
 }
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .game__Container .btn__Style {
   font-size: 1rem;
   padding: 0.3rem;
