@@ -26,5 +26,31 @@ function checkWinner() {
     }
     if(!game_Board.includes('')){
         status.textContent = "It's Draw 😟!";
+        game_Active = false;
     }
+
 }
+
+cells.forEach(cell => {
+    cell.addEventListener('click', ()=>{
+        const index = cell.dataset.index;
+        if (game_Board[index] !== "" || !game_Active) return;
+        game_Board[index] = current_Player;
+        cell.textContent = current_Player;
+        checkWinner();
+        current_Player = current_Player === "X" ? "O" : "X";
+        if(game_Active){
+            status.textContent = `Player ${current_Player} Turns!`;
+        }
+
+    });
+});
+
+restartGame.addEventListener('click', () =>{
+    game_Board = ["", "", "", "", "", "", "", "", ""];
+    cells.forEach(cell => cell.textContent = "");
+    game_Active = true;
+    current_Player = "X";
+    status.textContent = "Your Turn (X)";
+});
+
