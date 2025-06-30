@@ -8,8 +8,7 @@ const winnerPopup = document.getElementById('winnerPopup');
 const winnerText = document.getElementById('winnerText');
 const winnerGif = document.getElementById('winnerGif');
 const failSound = document.getElementById('failSound');
-
-
+const actionSound = document.getElementById('actionSound');
 
 let game_Board = ["", "", "", "", "", "", "", "", ""];
 let game_Active = true;
@@ -33,8 +32,6 @@ function checkWinner() {
       const winner = game_Board[a];
       status.textContent = `Player ${winner} Wins 😎!`;
       game_Active = false;
-
-      // Show popup
       showWinnerPopup(winner);
       return true;
     }
@@ -43,16 +40,12 @@ function checkWinner() {
   if (!game_Board.includes('')) {
     status.textContent = "It's Draw 😟!";
     game_Active = false;
-
-    // 👇 Call popup for draw
     showWinnerPopup("draw");
     return true;
   }
 
   return false;
 }
-
-
 
 function bestMove() {
   for (let combo of winning_Patterns) {
@@ -112,6 +105,8 @@ cells.forEach(cell => {
 });
 
 restartGame.addEventListener('click', () => {
+  actionSound.currentTime = 0;
+  actionSound.play();
   game_Board = ["", "", "", "", "", "", "", "", ""];
   cells.forEach(cell => {
     cell.textContent = "";
@@ -121,6 +116,14 @@ restartGame.addEventListener('click', () => {
   current_Player = "X";
   status.textContent = "Your Turn (X)";
 });
+
+function playExitSound() {
+  actionSound.currentTime = 0;
+  actionSound.play();
+  setTimeout(() => {
+    window.location.href = '../index.html';
+  }, 200);
+}
 
 function showWinnerPopup(winner) {
   if (winner === 'draw') {
@@ -140,4 +143,6 @@ function showWinnerPopup(winner) {
 
 function closePopup() {
   winnerPopup.style.display = 'none';
+  actionSound.currentTime = 0;
+  actionSound.play();
 }
