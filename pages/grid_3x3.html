@@ -24,8 +24,13 @@
       <button id="restart__Game" class="btn__Style">Restart</button>
       <button onclick="location.href='../index.html'" id="exit__Game" class="btn__Style">Exit</button>
 
-      <!-- Sound Effect -->
+      <div class="audio-controls">
+        <button id="muteBtn">Mute🔊</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+      </div>
       <audio id="clickSound" src="../assets/gear_fast.wav"></audio>
+      <audio id="clickSound2" src="../assets/click_update.mp3"></audio>
+      <audio id="bgMusic" src="../assets/last-hope.mp3" autoplay loop></audio>
     </div>
 
     <script src="../Javascript/grid__3x3.js"></script>

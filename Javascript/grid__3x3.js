@@ -2,6 +2,7 @@ const status = document.getElementById('status');
 const restartGame = document.getElementById('restart__Game');
 const cells = document.querySelectorAll('.cell');
 const clickSound = document.getElementById('clickSound');
+const clickSound2 = document.getElementById('clickSound2');
 
 let game_Board = ["", "", "", "", "", "", "", "", ""];
 let game_Active = true;
@@ -16,6 +17,10 @@ const winning_Patterns = [
 function playSound() {
   clickSound.currentTime = 0;
   clickSound.play();
+}
+function playSound2() {
+  clickSound2.currentTime = 0;
+  clickSound2.play();
 }
 
 function checkWinner() {
@@ -36,7 +41,6 @@ function checkWinner() {
 }
 
 function bestMove() {
-  // Try to win
   for (let combo of winning_Patterns) {
     const [a, b, c] = combo;
     if (game_Board[a] === 'O' && game_Board[b] === 'O' && game_Board[c] === '') return c;
@@ -44,7 +48,6 @@ function bestMove() {
     if (game_Board[b] === 'O' && game_Board[c] === 'O' && game_Board[a] === '') return a;
   }
 
-  // Block user win
   for (let combo of winning_Patterns) {
     const [a, b, c] = combo;
     if (game_Board[a] === 'X' && game_Board[b] === 'X' && game_Board[c] === '') return c;
@@ -52,7 +55,6 @@ function bestMove() {
     if (game_Board[b] === 'X' && game_Board[c] === 'X' && game_Board[a] === '') return a;
   }
 
-  // Otherwise, pick random
   const emptyIndices = game_Board
     .map((val, i) => val === "" ? i : null)
     .filter(i => i !== null);
@@ -104,4 +106,31 @@ restartGame.addEventListener('click', () => {
   game_Active = true;
   current_Player = "X";
   status.textContent = "Your Turn (X)";
+});
+
+// Background music logic to play infinite times:)
+
+const bgMusic = document.getElementById('bgMusic');
+const muteBtn = document.getElementById('muteBtn');
+const volumeSlider = document.getElementById('volumeSlider');
+
+bgMusic.volume = 0.5;
+volumeSlider.value = 0.5;
+window.addEventListener("load", () => {
+  const lastTime = localStorage.getItem('bgMusicTime');
+  if (lastTime) {
+    bgMusic.currentTime = parseFloat(lastTime);
+  }
+  bgMusic.play().catch(() => { });
+});
+setInterval(() => {
+  localStorage.setItem('bgMusicTime', bgMusic.currentTime);
+}, 1000);
+muteBtn.addEventListener('click', () => {
+  bgMusic.muted = !bgMusic.muted;
+  muteBtn.textContent = bgMusic.muted ? 'Muted🔇' : 'Mute🔊';
+  playSound2();
+});
+volumeSlider.addEventListener('input', () => {
+  bgMusic.volume = volumeSlider.value;
 });

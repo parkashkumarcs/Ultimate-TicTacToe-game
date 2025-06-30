@@ -7,7 +7,6 @@
   <title>Tic-Tac-Toe</title>
 </head>
 <body>
-
   <div class="container">
     <div class="glow__Dot"></div>
     <div class="button__Container">
@@ -15,15 +14,9 @@
       <button id="openModal" class="btn">Computer</button>
       <button onclick="location.href='#'" class="btn">Multiplayer</button>
     </div>
-  </div> 
-
-  <!-- 🎧 Audio Controls -->
-  <div class="audio__Controls">
-    <button id="muteToggle">Music🔊</button>
-    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
   </div>
 
-  <!-- Popup Modal Option -->
+  
   <div id="gridModal" class="modal">
     <div class="model__Content">
       <span class="close" id="closeModal">&times;</span>
@@ -36,12 +29,13 @@
       </div>
     </div>
   </div>
-
-  <!-- 🔊 Audio -->
+  
+  <div class="audio__Controls">
+    <button id="muteToggle">Mute🔊</button>
+    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" />
+  </div>
   <audio id="hoverSound" src="./assets/hover.wav" preload="auto"></audio>
   <audio id="clickSound" src="./assets/click_update.mp3" preload="auto"></audio>
-
-  <!-- 🎵 Multiple Background Tracks (shuffled) -->
   <audio id="bgMusic" preload="auto" loop></audio>
 
   <script src="./Javascript/popBox.js"></script>

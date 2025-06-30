@@ -9,44 +9,50 @@ const bgMusic = document.getElementById('bgMusic');
 const muteToggle = document.getElementById('muteToggle');
 const volumeSlider = document.getElementById('volumeSlider');
 
-// 🎵 Music List for Shuffle
 const musicTracks = [
-  './assets/best_console.mp3',
+  './assets/last-hope.mp3',
+
 ];
 
-// 🎲 Shuffle function
 function shuffleMusicList(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-// 🎧 Background music start after interaction
-function initAudio() {
-  bgMusic.src = shuffleMusicList(musicTracks);
-  bgMusic.play().catch(() => {});
-  document.body.removeEventListener('click', initAudio);
-}
-document.body.addEventListener('click', initAudio);
+bgMusic.volume = 0.5;
+volumeSlider.value = 0.5;
 
-// 🔊 Hover
+window.addEventListener('load', () => {
+  const allowed = localStorage.getItem('musicAllowed');
+  if (allowed === 'true') {
+    startMusic();
+  }
+});
+
+function startMusic() {
+  bgMusic.src = shuffleMusicList(musicTracks);
+  bgMusic.loop = true;
+  bgMusic.play()
+    .then(() => localStorage.setItem('musicAllowed', 'true'))
+    .catch(() => {});
+}
+
+document.body.addEventListener('click', startMusic, { once: true });
 function playHoverSound() {
   hoverSound.currentTime = 0;
   hoverSound.play().catch(() => {});
 }
 
-// 🔊 Click
 function playClickSound() {
   clickSound.currentTime = 0;
   clickSound.play().catch(() => {});
 }
 
-// ➕ Attach sounds to all buttons
 const allButtons = document.querySelectorAll('button');
 allButtons.forEach(btn => {
   btn.addEventListener('mouseenter', playHoverSound);
   btn.addEventListener('click', playClickSound);
 });
 
-// 💡 Modal logic
 openModal.onclick = () => {
   playClickSound();
   gridModal.style.display = 'flex';
@@ -67,7 +73,6 @@ window.onclick = (e) => {
   }
 };
 
-// 🔁 Grid button redirects
 const gridButtons = document.querySelectorAll('.button__Group .btn');
 gridButtons.forEach(button => {
   button.addEventListener('click', (e) => {
@@ -79,13 +84,11 @@ gridButtons.forEach(button => {
   });
 });
 
-// 🔇 Mute / Unmute
 muteToggle.addEventListener('click', () => {
   bgMusic.muted = !bgMusic.muted;
-  muteToggle.textContent = bgMusic.muted ? 'Muted🔇' : 'Music🔊';
+  muteToggle.textContent = bgMusic.muted ? 'Muted🔇' : 'Mute🔊';
 });
 
-// 🎚 Volume control
 volumeSlider.addEventListener('input', () => {
   bgMusic.volume = volumeSlider.value;
 });
