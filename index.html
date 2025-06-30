@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="./CSS/home.css" />
+  <link rel="stylesheet" href="./CSS/musicStyle.css">
   <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -29,15 +30,17 @@
       </div>
     </div>
   </div>
-  
+
   <div class="audio__Controls">
     <button id="muteToggle">Mute🔊</button>
     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" />
   </div>
   <audio id="hoverSound" src="./assets/hover.wav" preload="auto"></audio>
   <audio id="clickSound" src="./assets/click_update.mp3" preload="auto"></audio>
-  <audio id="bgMusic" preload="auto" loop></audio>
+  <audio id="bgMusic" data-bg="./assets/last-hope.mp3" preload="auto" loop></audio>
+
 
   <script src="./Javascript/popBox.js"></script>
+  <script src="./Javascript/bgMusic.js"></script>
 </body>
 </html>

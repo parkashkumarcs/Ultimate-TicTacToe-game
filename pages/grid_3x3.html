@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/grid__3x3.css">
+    <link rel="stylesheet" href="../CSS/grid__3x3.css" />
+    <link rel="stylesheet" href="../CSS/musicStyle.css" />
     <title>Tic-Tac-Toe 3x3 Grid</title>
   </head>
   <body>
@@ -22,17 +23,51 @@
         <div class="cell" data-index="8"></div>
       </div>
       <button id="restart__Game" class="btn__Style">Restart</button>
-      <button onclick="location.href='../index.html'" id="exit__Game" class="btn__Style">Exit</button>
+      <button
+        onclick="location.href='../index.html'"
+        id="exit__Game"
+        class="btn__Style"
+      >
+        Exit
+      </button>
 
-      <div class="audio-controls">
-        <button id="muteBtn">Mute🔊</button>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+      <div class="audio__Controls">
+        <button id="muteToggle">Mute🔊</button>
+        <input
+          type="range"
+          id="volumeSlider"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.5"
+        />
       </div>
-      <audio id="clickSound" src="../assets/gear_fast.wav"></audio>
-      <audio id="clickSound2" src="../assets/click_update.mp3"></audio>
-      <audio id="bgMusic" src="../assets/last-hope.mp3" autoplay loop></audio>
+      <audio id="clickSoundGB" src="../assets/gear_fast.wav"></audio>
+      <audio
+        id="clickMuteSound"
+        src="../assets/click_update.mp3"
+        preload="auto"
+      ></audio>
+      <audio
+        id="bgMusic"
+        data-bg="../assets/best_console.mp3"
+        preload="auto"
+        loop
+      ></audio>
+
+      <div id="winnerPopup" class="winner__Popup" style="display: none">
+        <div class="popup__Content">
+          <img id="winnerGif" src="" alt="Winner GIF" />
+          <h2 id="winnerText"></h2>
+          <button onclick="closePopup()" class="btn__Style">Close</button>
+        </div>
+      </div>
+
+      <audio id="winSound" src="../assets/Wins.mp3" preload="auto"></audio>
+      <audio id="failSound" src="../assets/fail.mp3" preload="auto"></audio>
     </div>
 
     <script src="../Javascript/grid__3x3.js"></script>
+    <script src="../Javascript/bgMusic.js"></script>
   </body>
 </html>

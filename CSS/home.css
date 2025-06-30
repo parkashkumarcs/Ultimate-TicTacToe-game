@@ -87,7 +87,6 @@ body {
   }
 }
 
-/* Button container */
 .button__Container {
   color: white;
   text-align: center;
@@ -98,7 +97,6 @@ body {
   width: 100%;
 }
 
-/* Heading */
 .button__Container h1 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-family: "Bitcount Grid Double", system-ui;
@@ -108,8 +106,6 @@ body {
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
-
-/* Buttons */
 .button__Container button {
   width: 60%;
   max-width: 200px;
@@ -128,7 +124,6 @@ body {
   background-color: #8102f8;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .container {
     height: auto;
@@ -269,27 +264,3 @@ body {
 }
 
 
-.audio__Controls {
-      position: absolute;
-      top: 15px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 8px 12px;
-      border-radius: 12px;
-    }
-
-    .audio__Controls button {
-      background: #000;
-      color: #fff;
-      border: 1px solid #6e14ff;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .audio__Controls input[type="range"] {
-      width: 100px;
-    }

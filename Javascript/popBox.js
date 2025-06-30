@@ -5,38 +5,8 @@ const gridModal = document.getElementById('gridModal');
 
 const hoverSound = document.getElementById('hoverSound');
 const clickSound = document.getElementById('clickSound');
-const bgMusic = document.getElementById('bgMusic');
-const muteToggle = document.getElementById('muteToggle');
-const volumeSlider = document.getElementById('volumeSlider');
 
-const musicTracks = [
-  './assets/last-hope.mp3',
 
-];
-
-function shuffleMusicList(list) {
-  return list[Math.floor(Math.random() * list.length)];
-}
-
-bgMusic.volume = 0.5;
-volumeSlider.value = 0.5;
-
-window.addEventListener('load', () => {
-  const allowed = localStorage.getItem('musicAllowed');
-  if (allowed === 'true') {
-    startMusic();
-  }
-});
-
-function startMusic() {
-  bgMusic.src = shuffleMusicList(musicTracks);
-  bgMusic.loop = true;
-  bgMusic.play()
-    .then(() => localStorage.setItem('musicAllowed', 'true'))
-    .catch(() => {});
-}
-
-document.body.addEventListener('click', startMusic, { once: true });
 function playHoverSound() {
   hoverSound.currentTime = 0;
   hoverSound.play().catch(() => {});
@@ -82,13 +52,4 @@ gridButtons.forEach(button => {
       window.location.href = link;
     }, 150);
   });
-});
-
-muteToggle.addEventListener('click', () => {
-  bgMusic.muted = !bgMusic.muted;
-  muteToggle.textContent = bgMusic.muted ? 'Muted🔇' : 'Mute🔊';
-});
-
-volumeSlider.addEventListener('input', () => {
-  bgMusic.volume = volumeSlider.value;
 });

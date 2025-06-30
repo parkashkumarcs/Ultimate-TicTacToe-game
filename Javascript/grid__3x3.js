@@ -1,8 +1,15 @@
 const status = document.getElementById('status');
 const restartGame = document.getElementById('restart__Game');
 const cells = document.querySelectorAll('.cell');
-const clickSound = document.getElementById('clickSound');
-const clickSound2 = document.getElementById('clickSound2');
+const clickSoundGB = document.getElementById('clickSoundGB');
+
+const winSound = document.getElementById('winSound');
+const winnerPopup = document.getElementById('winnerPopup');
+const winnerText = document.getElementById('winnerText');
+const winnerGif = document.getElementById('winnerGif');
+const failSound = document.getElementById('failSound');
+
+
 
 let game_Board = ["", "", "", "", "", "", "", "", ""];
 let game_Active = true;
@@ -15,30 +22,37 @@ const winning_Patterns = [
 ];
 
 function playSound() {
-  clickSound.currentTime = 0;
-  clickSound.play();
-}
-function playSound2() {
-  clickSound2.currentTime = 0;
-  clickSound2.play();
+  clickSoundGB.currentTime = 0;
+  clickSoundGB.play();
 }
 
 function checkWinner() {
   for (const combo of winning_Patterns) {
     const [a, b, c] = combo;
     if (game_Board[a] && game_Board[a] === game_Board[b] && game_Board[b] === game_Board[c]) {
-      status.textContent = `Player ${game_Board[a]} Wins 😎!`;
+      const winner = game_Board[a];
+      status.textContent = `Player ${winner} Wins 😎!`;
       game_Active = false;
+
+      // Show popup
+      showWinnerPopup(winner);
       return true;
     }
   }
+
   if (!game_Board.includes('')) {
     status.textContent = "It's Draw 😟!";
     game_Active = false;
+
+    // 👇 Call popup for draw
+    showWinnerPopup("draw");
     return true;
   }
+
   return false;
 }
+
+
 
 function bestMove() {
   for (let combo of winning_Patterns) {
@@ -108,29 +122,22 @@ restartGame.addEventListener('click', () => {
   status.textContent = "Your Turn (X)";
 });
 
-// Background music logic to play infinite times:)
-
-const bgMusic = document.getElementById('bgMusic');
-const muteBtn = document.getElementById('muteBtn');
-const volumeSlider = document.getElementById('volumeSlider');
-
-bgMusic.volume = 0.5;
-volumeSlider.value = 0.5;
-window.addEventListener("load", () => {
-  const lastTime = localStorage.getItem('bgMusicTime');
-  if (lastTime) {
-    bgMusic.currentTime = parseFloat(lastTime);
+function showWinnerPopup(winner) {
+  if (winner === 'draw') {
+    winnerText.textContent = "It's a Draw 😟!";
+    winnerGif.src = '../assets/try_again.gif'; 
+    failSound.currentTime = 0;
+    failSound.play().catch(() => {});
+  } else {
+    winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    winnerGif.src = '../assets/victory.gif';
+    winSound.currentTime = 0;
+    winSound.play().catch(() => {});
   }
-  bgMusic.play().catch(() => { });
-});
-setInterval(() => {
-  localStorage.setItem('bgMusicTime', bgMusic.currentTime);
-}, 1000);
-muteBtn.addEventListener('click', () => {
-  bgMusic.muted = !bgMusic.muted;
-  muteBtn.textContent = bgMusic.muted ? 'Muted🔇' : 'Mute🔊';
-  playSound2();
-});
-volumeSlider.addEventListener('input', () => {
-  bgMusic.volume = volumeSlider.value;
-});
+
+  winnerPopup.style.display = 'flex';
+}
+
+function closePopup() {
+  winnerPopup.style.display = 'none';
+}
