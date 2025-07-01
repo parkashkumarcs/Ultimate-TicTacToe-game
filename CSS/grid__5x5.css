@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cabin:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url("../assets/backg.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+.game__Container {
+  width: 90%;
+  max-width: 650px;
+  text-align: center;
+  padding: 2rem;
+  background: black;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #4c00ff;
+}
+
+.game__Container h1 {
+  font-size: clamp(1rem, 2vw, 2.5rem);
+  font-family: "Bitcount Grid Double", system-ui;
+  font-weight: 400;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.game__Container h1 span {
+  color: #4c00ff;
+}
+
+.status_Style {
+  display: inline-block;
+  background-color: #222;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 0.1rem solid #e4fe4f;
+  font-size: 1.2rem;
+  font-family: "Cabin", sans-serif;
+}
+
+.grid__Board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 1.1rem auto;
+  max-width: 330px;
+}
+
+.cell {
+  width: 55px;
+  height: 55px;
+  background-color: black;
+  border: 1px solid #6e14ff;
+  border-radius: 12px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: "Cabin", sans-serif;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cell.X, .cell.O {
+  animation: pop-in 0.2s ease forwards;
+}
+
+.cell:hover {
+  background-color: #1a1a1a;
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.btn__Style {
+  font-size: 1rem;
+  padding: 0.3rem;
+  width: 10rem;
+  background-color: #6e14ff;
+  border: 0.1rem solid #6e14ff;
+  border-radius: 2rem;
+  color: white;
+  margin: 0.5rem;
+  transition: 0.5s;
+}
+
+.btn__Style:hover {
+  cursor: pointer;
+  background-color: black;
+  transition: 0.5s;
+}
+
+@media (max-width: 600px) {
+  .grid__Board {
+    max-width: 300px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .cell {
+    width: 55px;
+    height: 55px;
+    font-size: 1.4rem;
+  }
+
+  .btn__Style {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.winner__Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup__Content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: #000;
+  box-shadow: 0 0 30px #e4fe4f;
+  animation: fadeIn 0.5s ease;
+}
+
+.popup__Content img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}

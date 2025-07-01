@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/grid__5x5.css" />
+    <link rel="stylesheet" href="../CSS/musicStyle.css" />
+    <title>Tic-Tac-Toe 5x5 Grid</title>
+  </head>
+  <body>
+    <div class="game__Container">
+      <h1>Tic Tac Toe <span>5x5 Grid</span></h1>
+      <div class="status_Style" id="status">Your Turn (X)</div>
+      <div class="grid__Board" id="board">
+        <!-- 25 cells -->
+        <script>
+          for (let i = 0; i < 25; i++) {
+            document.write(`<div class="cell" data-index="${i}"></div>`);
+          }
+        </script>
+      </div>
+      <button id="restart__Game" class="btn__Style">Restart</button>
+      <button onclick="playExitSound()" id="exit__Game" class="btn__Style">Exit</button>
+
+      <div class="audio__Controls">
+        <button id="muteToggle">Mute🔊</button>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" />
+      </div>
+
+      <audio id="clickSoundGB" src="../assets/gear_fast.wav"></audio>
+      <audio id="clickMuteSound" src="../assets/click_update.mp3" preload="auto"></audio>
+      <audio id="bgMusic" data-bg="../assets/best_console.mp3" preload="auto" loop></audio>
+
+      <div id="winnerPopup" class="winner__Popup" style="display: none">
+        <div class="popup__Content">
+          <img id="winnerGif" src="" alt="Winner GIF" />
+          <h2 id="winnerText"></h2>
+          <button onclick="closePopup()" class="btn__Style">Close</button>
+        </div>
+      </div>
+
+      <audio id="winSound" src="../assets/Wins.mp3" preload="auto"></audio>
+      <audio id="failSound" src="../assets/fail.mp3" preload="auto"></audio>
+      <audio id="actionSound" src="../assets/click_update.mp3" preload="auto"></audio>
+    </div>
+
+    <script src="../Javascript/grid_5x5.js"></script>
+    <script src="../Javascript/bgMusic.js"></script>
+  </body>
+</html>
