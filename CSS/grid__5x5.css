@@ -17,7 +17,7 @@ body {
 
 .game__Container {
   width: 90%;
-  max-width: 650px;
+  max-width: 500px;
   text-align: center;
   padding: 2rem;
   background: black;
