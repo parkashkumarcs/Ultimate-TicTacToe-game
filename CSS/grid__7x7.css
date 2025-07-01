@@ -8,6 +8,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +53,7 @@ body {
 .grid__Board {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 7px;
+  gap: 6px;
   margin: 1.1rem auto;
   max-width: 350px;
 }
@@ -61,8 +63,8 @@ body {
   height: 40px;
   background-color: black;
   border: 1px solid #6e14ff;
-  border-radius: 12px;
-  font-size: 1.8rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,17 +110,21 @@ body {
   transition: 0.5s;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
+  .game__Container{
+    width: 95%;
+    max-width: 300px; 
+  }
   .grid__Board {
-    max-width: 360px;
+    max-width: 350px;
     grid-template-columns: repeat(7, 1fr);
     gap: 6px;
   }
 
   .cell {
-    width: 45px;
-    height: 45px;
-    font-size: 1.4rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
   }
 
   .btn__Style {

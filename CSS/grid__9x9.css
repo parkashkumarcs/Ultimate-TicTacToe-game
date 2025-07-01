@@ -18,8 +18,8 @@ body {
 }
 
 .game__Container {
-  width: 90%;
-  max-width: 500px;
+  width: 95%;
+  max-width: 550px;
   text-align: center;
   padding: 2rem;
   background: black;
@@ -52,19 +52,19 @@ body {
 
 .grid__Board {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 6px;
   margin: 1.1rem auto;
-  max-width: 330px;
+  max-width: 350px;
 }
 
 .cell {
-  width: 55px;
-  height: 55px;
+  width: 30px;
+  height: 30px;
   background-color: black;
   border: 1px solid #6e14ff;
-  border-radius: 12px;
-  font-size: 2rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,17 +110,17 @@ body {
   transition: 0.5s;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .grid__Board {
-    max-width: 300px;
-    grid-template-columns: repeat(5, 1fr);
+    max-width: 350px;
+    grid-template-columns: repeat(9, 1fr);
     gap: 6px;
   }
 
   .cell {
-    width: 55px;
-    height: 55px;
-    font-size: 1.4rem;
+    width: 33px;
+    height: 33px;
+    font-size: 1.3rem;
   }
 
   .btn__Style {

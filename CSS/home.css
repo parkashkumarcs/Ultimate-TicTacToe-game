@@ -5,6 +5,7 @@ body {
   padding: 0;
   height: 100vh;
   background: url('../assets/backg.jpg') no-repeat center center/cover;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +205,7 @@ body {
 }
 
 .model__Content {
-  background: rgb(105, 7, 197);
+  background: #924ffe;
   padding: 30px 20px;
   border-radius: 12px;
   width: 90%;
@@ -235,22 +236,23 @@ body {
 .model__Content .btn {
   width: 50%;
   margin: 10px 0;
-  border-radius: 4px;
+  border-radius: 2rem;
   border: none;
   font-size: 20px;
   font-weight: bolder;
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   padding: 10px;
   transition: .5s;
-  border: .1rem solid black;
+  border: .1rem solid #924ffe;
 }
 .model__Content .btn:hover{
     scale: 1.1;
     cursor: pointer;
-    background-color: rgba(105, 7, 197, 0.808);
+    background-color: rgb(0, 0, 0);
     transition: .5s;
-    border: .1rem solid rgb(4, 245, 225);
+    color: white;
+    border: .1rem solid #e4fe4f;
 }
 
 .close {

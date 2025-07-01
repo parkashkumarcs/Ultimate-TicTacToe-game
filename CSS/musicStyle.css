@@ -22,3 +22,22 @@
     .audio__Controls input[type="range"] {
       width: 100px;
     }
+    @media (max-width: 500px) {
+  .audio__Controls {
+    flex-direction: row;
+    align-items: flex-end;
+    top: 30px;
+    right: 10px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .audio__Controls button {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .audio__Controls input[type="range"] {
+    width: 80px;
+  }
+}
