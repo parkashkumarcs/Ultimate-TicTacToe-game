@@ -36,30 +36,6 @@ Welcome to **Ultimate Tic-Tac-Toe**, a modern, feature-rich web-based game devel
 
 ---
 
-## 🧩 Folder Structure
-
-📁 tic-tac-toe-ultimate
-├── index.html
-├── popBox.js
-├── gameCore.js
-├── grid_3x3.html / .js / .css
-├── grid_5x5.html / .js / .css
-├── grid_7x7.html / .js / .css
-├── grid_9x9.html / .js / .css
-├── assets/
-│ ├── sounds/
-│ ├── images/
-│ └── gifs/
-└── CSS/
-├── home.css
-└── musicStyle.css
-
-yaml
-Copy
-Edit
-
----
-
 ## ⚙️ Technologies Used
 
 - HTML5, CSS3, Vanilla JavaScript  
@@ -127,14 +103,8 @@ Home Page	Gameplay	Win Popup
 Designed and Developed by Parkash Kumar
 Assets sourced from FreeSound.org and Pexels
 
-📄 License
-Licensed under the MIT License — free to use, share, and modify.
-
-yaml
-Copy
-Edit
-
----
+# 📄 License
+## Licensed under the MIT License — free to use, share, and modify.
 
 ### ✅ Summary
 
@@ -143,12 +113,7 @@ This version makes it **crystal clear**:
 - But the game is still fully playable with **AI and same-device modes**
 - Future multiplayer updates will fit naturally without changing your folder structure
 
-Would you also like:
-- GitHub Pages deployment guide?
-- Auto-detect multiplayer mode from `?join=` links?
-
-Let me know, I’ll help you finish it off professionally.
-
+## Thanks for checking out Ultimate Tic-Tac-Toe! Enjoy the game, and feel free to fork, star ⭐, or contribute!
 
 
 
