@@ -54,39 +54,16 @@ Welcome to **Ultimate Tic-Tac-Toe**, a modern, feature-rich web-based game devel
    ```bash
    git clone https://github.com/your-username/tic-tac-toe-ultimate.git
    cd tic-tac-toe-ultimate
-Open index.html in your browser — no server required.
 
-🔌 Firebase Setup (Multiplayer - Coming Soon)
-This feature is under development. You can still prepare your Firebase project now.
+## Stay tuned for updates when multiplayer is officially launched 🚀
 
-Go to Firebase Console
-
-Create a new Firebase project
-
-Enable Realtime Database (in test mode for development)
-
-In popBox.js (or a future multiplayer.js file), insert your Firebase config:
-
-js
-Copy
-Edit
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_DOMAIN",
-  databaseURL: "YOUR_DB_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-Stay tuned for updates when multiplayer is officially launched 🚀
-
-📸 Screenshots![winner](https://github.com/user-attachments/assets/91df54e6-6db5-4f2e-a6f6-553b10f25332)
-![gameMode](https://github.com/user-attachments/assets/6047c01f-366d-4eb2-aa75-611ea24af991)
+# 📸 Screenshots
+## Home
 ![home](https://github.com/user-attachments/assets/5f2d016b-20e6-43f4-8880-41b5c4be865a)
-
-Home Page	Gameplay	Win Popup
-(Add screenshots here)		
+## Page	Gameplay	
+![gameMode](https://github.com/user-attachments/assets/6047c01f-366d-4eb2-aa75-611ea24af991)
+Win Popup
+![winner](https://github.com/user-attachments/assets/91df54e6-6db5-4f2e-a6f6-553b10f25332)
 
 🧪 Coming Soon
 🌐 Firebase Multiplayer
