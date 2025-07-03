@@ -13,11 +13,11 @@
     <div class="button__Container">
       <h1>Tic Tac Toe Game</h1>
       <button id="openModal" class="btn">Computer</button>
-      <button id="multiplayerBtn" class="btn">Multiplayer</button>
+      <button id="p2pBtn" class="btn">P2P</button>
     </div>
   </div>
 
-  <!-- Modal for Computer Mode -->
+  <!-- Grid Selection Modal (shared for Computer and P2P) -->
   <div id="gridModal" class="modal">
     <div class="model__Content">
       <span class="close" id="closeModal">&times;</span>
@@ -31,41 +31,18 @@
     </div>
   </div>
 
-  <!-- Modal for Multiplayer Mode -->
-<div id="multiModal" class="modal">
-  <div class="model__Content">
-    <span class="close" id="closeMultiModal">&times;</span>
-    <h2>Multiplayer Options</h2>
-    <div class="button__Group">
-      <button class="btn">Search Online</button>
-      <div class="friend__Play">
-        <button class="btn" id="generateCodeBtn">Generate Code</button>
-        <input type="text" id="codeInput" placeholder="Enter the code">
-        <button class="btn" id="startGameBtn">Start Game</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="generatedCodeModal" class="modal">
-  <div class="model__Content">
-    <span class="close" id="closeCodeModal">&times;</span>
-    <h2>Share This Link with Friend</h2>
-    <input type="text" id="generatedCodeField" readonly>
-    <button class="btn" id="copyCodeBtn">Copy Link</button>
-  </div>
-</div>
-
-
+  <!-- Audio Controls -->
   <div class="audio__Controls">
     <button id="muteToggle">Mute🔊</button>
     <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" />
   </div>
 
+  <!-- Audio -->
   <audio id="hoverSound" src="./assets/hover.wav" preload="auto"></audio>
   <audio id="clickSound" src="./assets/click_update.mp3" preload="auto"></audio>
   <audio id="bgMusic" data-bg="./assets/last-hope.mp3" preload="auto" loop></audio>
 
+  <!-- Scripts -->
   <script src="./Javascript/popBox.js"></script>
   <script src="./Javascript/bgMusic.js"></script>
 </body>

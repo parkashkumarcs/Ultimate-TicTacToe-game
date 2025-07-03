@@ -16,6 +16,10 @@ let current_Player = 'X';
 const boardSize = 5;
 const winLength = 4;
 
+// Read mode from URL
+const urlParams = new URLSearchParams(window.location.search);
+const gameMode = urlParams.get('mode') || 'computer'; // default to computer
+
 function playSound() {
   clickSoundGB.currentTime = 0;
   clickSoundGB.play();
@@ -102,7 +106,7 @@ function bestMove() {
   const scores = Array(25).fill(0);
   const lines = [];
 
-  // Row lines
+  // Rows
   for (let row = 0; row < boardSize; row++) {
     for (let col = 0; col <= boardSize - winLength; col++) {
       let line = [];
@@ -113,7 +117,7 @@ function bestMove() {
     }
   }
 
-  // Col lines
+  // Columns
   for (let col = 0; col < boardSize; col++) {
     for (let row = 0; row <= boardSize - winLength; row++) {
       let line = [];
@@ -124,7 +128,7 @@ function bestMove() {
     }
   }
 
-  // Diagonal ↘
+  // Diagonals ↘
   for (let row = 0; row <= boardSize - winLength; row++) {
     for (let col = 0; col <= boardSize - winLength; col++) {
       let line = [];
@@ -135,7 +139,7 @@ function bestMove() {
     }
   }
 
-  // Anti-Diagonal ↙
+  // Diagonals ↙
   for (let row = 0; row <= boardSize - winLength; row++) {
     for (let col = winLength - 1; col < boardSize; col++) {
       let line = [];
@@ -149,8 +153,8 @@ function bestMove() {
   for (let line of lines) {
     for (let idx of line) {
       if (game_Board[idx] === "") {
-        scores[idx] += evaluateLine(line, "O"); // Offensive
-        scores[idx] += evaluateLine(line, "X"); // Defensive
+        scores[idx] += evaluateLine(line, "O");
+        scores[idx] += evaluateLine(line, "X");
       }
     }
   }
@@ -172,7 +176,7 @@ function bestMove() {
     return bestIndices[Math.floor(Math.random() * bestIndices.length)];
   }
 
-  // Fallback
+  // fallback
   const emptyIndices = game_Board.map((val, i) => val === "" ? i : null).filter(i => i !== null);
   return emptyIndices.length > 0 ? emptyIndices[Math.floor(Math.random() * emptyIndices.length)] : null;
 }
@@ -193,19 +197,35 @@ function computerMove() {
   }
 }
 
+// Click logic for both P2P and Computer
 cells.forEach(cell => {
   cell.addEventListener('click', () => {
     const index = cell.dataset.index;
-    if (game_Board[index] !== "" || !game_Active || current_Player !== 'X') return;
+    if (game_Board[index] !== "" || !game_Active) return;
 
-    game_Board[index] = 'X';
-    cell.textContent = 'X';
-    cell.classList.add('X');
-    playSound();
-    if (!checkWinner()) {
-      current_Player = 'O';
-      status.textContent = "Computer Thinking...";
-      setTimeout(computerMove, 600);
+    if (gameMode === "p2p") {
+      // P2P Mode
+      game_Board[index] = current_Player;
+      cell.textContent = current_Player;
+      cell.classList.add(current_Player);
+      playSound();
+      if (!checkWinner()) {
+        current_Player = current_Player === "X" ? "O" : "X";
+        status.textContent = `Player ${current_Player}'s Turn`;
+      }
+    } else {
+      // Computer Mode
+      if (current_Player !== "X") return;
+
+      game_Board[index] = 'X';
+      cell.textContent = 'X';
+      cell.classList.add('X');
+      playSound();
+      if (!checkWinner()) {
+        current_Player = 'O';
+        status.textContent = "Computer Thinking...";
+        setTimeout(computerMove, 600);
+      }
     }
   });
 });
@@ -220,7 +240,7 @@ restartGame.addEventListener('click', () => {
   });
   game_Active = true;
   current_Player = "X";
-  status.textContent = "Your Turn (X)";
+  status.textContent = (gameMode === "p2p") ? "Player X's Turn" : "Your Turn (X)";
 });
 
 function playExitSound() {
@@ -238,7 +258,11 @@ function showWinnerPopup(winner) {
     failSound.currentTime = 0;
     failSound.play().catch(() => {});
   } else {
-    winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    if (gameMode === "p2p") {
+      winnerText.textContent = `Player ${winner} Wins 🎉!`;
+    } else {
+      winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    }
     winnerGif.src = '../assets/victory.gif';
     winSound.currentTime = 0;
     winSound.play().catch(() => {});

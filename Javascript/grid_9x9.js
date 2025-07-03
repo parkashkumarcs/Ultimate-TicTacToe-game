@@ -16,6 +16,10 @@ let game_Board = Array(boardSize * boardSize).fill("");
 let game_Active = true;
 let current_Player = 'X';
 
+// Detect game mode from URL (?mode=p2p or ?mode=computer)
+const urlParams = new URLSearchParams(window.location.search);
+const gameMode = urlParams.get('mode') || 'computer';
+
 function playSound() {
   clickSoundGB.currentTime = 0;
   clickSoundGB.play();
@@ -166,11 +170,13 @@ function bestMove() {
   let bestMoves = [];
 
   scores.forEach((score, index) => {
-    if (score > maxScore) {
-      maxScore = score;
-      bestMoves = [index];
-    } else if (score === maxScore) {
-      bestMoves.push(index);
+    if (game_Board[index] === "") {
+      if (score > maxScore) {
+        maxScore = score;
+        bestMoves = [index];
+      } else if (score === maxScore) {
+        bestMoves.push(index);
+      }
     }
   });
 
@@ -196,19 +202,31 @@ function computerMove() {
 cells.forEach(cell => {
   cell.addEventListener('click', () => {
     const index = parseInt(cell.dataset.index);
-    if (game_Board[index] !== "" || !game_Active || current_Player !== 'X') return;
+    if (game_Board[index] !== "" || !game_Active) return;
 
-    game_Board[index] = 'X';
-    cell.textContent = 'X';
-    cell.classList.add('X');
-    playSound();
-    const gameOver = checkWinner();
-    if (!gameOver) {
-      current_Player = 'O';
-      status.textContent = "Computer Thinking...";
-      setTimeout(() => {
-        if (game_Active) computerMove();
-      }, 600);
+    if (gameMode === 'p2p') {
+      game_Board[index] = current_Player;
+      cell.textContent = current_Player;
+      cell.classList.add(current_Player);
+      playSound();
+      if (!checkWinner()) {
+        current_Player = current_Player === 'X' ? 'O' : 'X';
+        status.textContent = `Player ${current_Player}'s Turn`;
+      }
+    } else {
+      if (current_Player !== 'X') return;
+      game_Board[index] = 'X';
+      cell.textContent = 'X';
+      cell.classList.add('X');
+      playSound();
+      const gameOver = checkWinner();
+      if (!gameOver) {
+        current_Player = 'O';
+        status.textContent = "Computer Thinking...";
+        setTimeout(() => {
+          if (game_Active) computerMove();
+        }, 600);
+      }
     }
   });
 });
@@ -223,7 +241,7 @@ restartGame.addEventListener('click', () => {
   });
   game_Active = true;
   current_Player = "X";
-  status.textContent = "Your Turn (X)";
+  status.textContent = gameMode === 'p2p' ? "Player X's Turn" : "Your Turn (X)";
 });
 
 function playExitSound() {
@@ -241,7 +259,11 @@ function showWinnerPopup(winner) {
     failSound.currentTime = 0;
     failSound.play().catch(() => {});
   } else {
-    winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    if (gameMode === 'p2p') {
+      winnerText.textContent = `Player ${winner} Wins 🎉!`;
+    } else {
+      winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    }
     winnerGif.src = '../assets/victory.gif';
     winSound.currentTime = 0;
     winSound.play().catch(() => {});

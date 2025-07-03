@@ -16,6 +16,10 @@ let current_Player = 'X';
 const boardSize = 7;
 const winLength = 5;
 
+// Read mode from URL
+const urlParams = new URLSearchParams(window.location.search);
+const gameMode = urlParams.get('mode') || 'computer'; // default to computer
+
 function playSound() {
   clickSoundGB.currentTime = 0;
   clickSoundGB.play();
@@ -80,10 +84,9 @@ function announceWinner(index) {
   return true;
 }
 
-// 🎯 Advanced AI Evaluation
+// Advanced AI evaluation
 function evaluateWindow(indices, symbol) {
-  let score = 0;
-  let countSelf = 0, countOpp = 0;
+  let score = 0, countSelf = 0, countOpp = 0;
 
   for (let i of indices) {
     if (game_Board[i] === symbol) countSelf++;
@@ -108,41 +111,41 @@ function getAllWindows() {
 
   for (let row = 0; row < boardSize; row++) {
     for (let col = 0; col <= boardSize - winLength; col++) {
-      const window = [];
+      let w = [];
       for (let i = 0; i < winLength; i++) {
-        window.push(row * boardSize + col + i);
+        w.push(row * boardSize + col + i);
       }
-      windows.push(window);
+      windows.push(w);
     }
   }
 
   for (let col = 0; col < boardSize; col++) {
     for (let row = 0; row <= boardSize - winLength; row++) {
-      const window = [];
+      let w = [];
       for (let i = 0; i < winLength; i++) {
-        window.push((row + i) * boardSize + col);
+        w.push((row + i) * boardSize + col);
       }
-      windows.push(window);
+      windows.push(w);
     }
   }
 
   for (let row = 0; row <= boardSize - winLength; row++) {
     for (let col = 0; col <= boardSize - winLength; col++) {
-      const window = [];
+      let w = [];
       for (let i = 0; i < winLength; i++) {
-        window.push((row + i) * boardSize + col + i);
+        w.push((row + i) * boardSize + col + i);
       }
-      windows.push(window);
+      windows.push(w);
     }
   }
 
   for (let row = 0; row <= boardSize - winLength; row++) {
     for (let col = winLength - 1; col < boardSize; col++) {
-      const window = [];
+      let w = [];
       for (let i = 0; i < winLength; i++) {
-        window.push((row + i) * boardSize + col - i);
+        w.push((row + i) * boardSize + col - i);
       }
-      windows.push(window);
+      windows.push(w);
     }
   }
 
@@ -153,27 +156,26 @@ function bestMove() {
   const windows = getAllWindows();
   const scores = Array(49).fill(0);
 
-  for (let window of windows) {
-    const scoreO = evaluateWindow(window, 'O');
-    for (let index of window) {
-      if (game_Board[index] === "") scores[index] += scoreO;
+  for (let win of windows) {
+    const s = evaluateWindow(win, 'O');
+    for (let idx of win) {
+      if (game_Board[idx] === "") scores[idx] += s;
     }
   }
 
-  let maxScore = -Infinity;
-  let bestMoves = [];
-
-  scores.forEach((score, index) => {
-    if (score > maxScore) {
-      maxScore = score;
-      bestMoves = [index];
-    } else if (score === maxScore) {
-      bestMoves.push(index);
+  let maxScore = -Infinity, bestMoves = [];
+  scores.forEach((sc, i) => {
+    if (game_Board[i] === "") {
+      if (sc > maxScore) {
+        maxScore = sc;
+        bestMoves = [i];
+      } else if (sc === maxScore) {
+        bestMoves.push(i);
+      }
     }
   });
 
-  if (bestMoves.length === 0) return null;
-  return bestMoves[Math.floor(Math.random() * bestMoves.length)];
+  return bestMoves.length ? bestMoves[Math.floor(Math.random() * bestMoves.length)] : null;
 }
 
 function computerMove() {
@@ -191,19 +193,32 @@ function computerMove() {
   }
 }
 
+// Click events handle both modes
 cells.forEach(cell => {
   cell.addEventListener('click', () => {
-    const index = parseInt(cell.dataset.index);
-    if (game_Board[index] !== "" || !game_Active || current_Player !== 'X') return;
+    const idx = parseInt(cell.dataset.index);
+    if (game_Board[idx] !== "" || !game_Active) return;
 
-    game_Board[index] = 'X';
-    cell.textContent = 'X';
-    cell.classList.add('X');
-    playSound();
-    if (!checkWinner()) {
-      current_Player = 'O';
-      status.textContent = "Computer Thinking...";
-      setTimeout(computerMove, 600);
+    if (gameMode === 'p2p') {
+      game_Board[idx] = current_Player;
+      cell.textContent = current_Player;
+      cell.classList.add(current_Player);
+      playSound();
+      if (!checkWinner()) {
+        current_Player = current_Player === 'X' ? 'O' : 'X';
+        status.textContent = `Player ${current_Player}'s Turn`;
+      }
+    } else {
+      if (current_Player !== 'X') return;
+      game_Board[idx] = 'X';
+      cell.textContent = 'X';
+      cell.classList.add('X');
+      playSound();
+      if (!checkWinner()) {
+        current_Player = 'O';
+        status.textContent = "Computer Thinking...";
+        setTimeout(computerMove, 600);
+      }
     }
   });
 });
@@ -212,13 +227,13 @@ restartGame.addEventListener('click', () => {
   actionSound.currentTime = 0;
   actionSound.play();
   game_Board = Array(49).fill("");
-  cells.forEach(cell => {
-    cell.textContent = "";
-    cell.classList.remove('X', 'O');
+  cells.forEach(c => {
+    c.textContent = "";
+    c.classList.remove('X', 'O');
   });
   game_Active = true;
   current_Player = "X";
-  status.textContent = "Your Turn (X)";
+  status.textContent = gameMode === 'p2p' ? "Player X's Turn" : "Your Turn (X)";
 });
 
 function playExitSound() {
@@ -236,7 +251,11 @@ function showWinnerPopup(winner) {
     failSound.currentTime = 0;
     failSound.play().catch(() => {});
   } else {
-    winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    if (gameMode === 'p2p') {
+      winnerText.textContent = `Player ${winner} Wins 🎉!`;
+    } else {
+      winnerText.textContent = winner === 'X' ? 'You Win 🎉!' : 'Computer Wins 🤖!';
+    }
     winnerGif.src = '../assets/victory.gif';
     winSound.currentTime = 0;
     winSound.play().catch(() => {});
