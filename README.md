@@ -1,4 +1,4 @@
-#### 🕹️ Ultimate Tic-Tac-Toe Web Game
+# 🕹️ Ultimate Tic-Tac-Toe Web Game
 
 Welcome to **Ultimate Tic-Tac-Toe**, a modern, feature-rich web-based game developed using **HTML**, **CSS**, and **JavaScript**. This project supports multiple gameplay modes, engaging sound effects, AI opponents, and dynamic board sizes. Real-time multiplayer using **Firebase** will be added in a future release.
 
